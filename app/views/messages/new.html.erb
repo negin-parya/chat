@@ -1,0 +1,15 @@
+<%= form_for([@user, @user.messages.new]) do |f| %>
+  <div class="field">
+    <%= f.label :message_text %><br />
+    <%= f.text_field :message_text %>
+  </div>
+  <div class="field">
+   
+    <%= f.hidden_field :user_id %>
+  </div>
+
+  <div  class="actions">
+<a name="bottom"></a>
+    <%= f.submit 'send' %>
+  </div>
+<% end %>

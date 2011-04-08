@@ -1,0 +1,47 @@
+<h1>Listing users</h1>
+
+
+<table>
+
+  <tr>
+
+    <th>Username</th>
+
+    <th>Password</th>
+
+    <th>Name</th>
+
+    <th>Lastname</th>
+
+    <th></th>
+
+    <th></th>
+
+    <th></th>
+
+  </tr>
+
+<tr>
+<td><%= current_user.email %></td>
+
+    <td><%= current_user.password %></td>
+
+    <td><%= current_user.first_name %></td>
+
+    <td><%= current_user.last_name %></td>
+
+    <td><%= link_to 'Show', current_user %></td>
+
+    <td><%= link_to 'Edit', edit_user_path(current_user) %></td>
+
+    <td><%= link_to 'Destroy', current_user, :confirm => 'Are you sure?', :method => :delete %></td>
+
+  </tr>
+</table>
+
+
+<br />
+
+
+
+<a href="/spots">Go back to classroom!</a>

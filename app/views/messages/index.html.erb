@@ -1,0 +1,74 @@
+
+<a href="/privateMessages">Private Messages</a>
+<br>
+<a href="/spots">Classroom</a>
+
+
+<!--
+choosec date:
+<select onChange="test();">
+<option>today</option>
+<option>1 week ago to date</option>
+<option>whole messages</option>
+</select>
+-->
+<%= form_for(@message) do |f| %>
+
+  <div class="field">
+    <%= f.label :message_text %><br />
+   
+    <%= f.text_field :message_text %>
+  </div>
+  <div class="field">
+   <%@message.user_id=current_user.id%>
+   <%@message.sender_id=current_user.id%>
+   
+   <%= f.hidden_field :user_id %>
+   <%= f.hidden_field :sender_id %>
+
+  </div>
+
+  <div  class="actions">
+<a name="bottom"></a>
+    <%= f.submit 'send' %>
+  </div>
+<% end %>
+<%session['saved_location']='Messages'%>
+
+<table>
+  <tr>
+    <th>Global Messages:</th>
+      
+   
+   <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+
+  <tr>
+
+<td>
+<select name="drop1" id="Select1"  style = "width:=400px"   multiple="multiple">
+
+<% @messages.each do |message| %>
+
+
+
+    <% id=message.sender_id %>
+    <% if id!=nil then %>
+    <% us=User.find_by_id(id)%>
+
+    <option value="<%= message.id %>"> <%= us.email.to_s%>:  <%= message.message_text %></option>
+
+      
+   
+<%end%>
+<% end %>
+
+
+</select>  
+
+</table>
+
+

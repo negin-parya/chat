@@ -1,0 +1,36 @@
+<meta http-equiv="refresh" content="10" />
+<% us=User.find(params[:id])%>
+
+<h4><font color='green'><%= us.first_name%> <%= us.last_name%></font></h4>
+
+<%= form_for(@message) do |f| %>
+
+  <div class="field">
+    <%= f.label :message_text %><br />
+   
+    <%= f.text_field :message_text %>
+  </div>
+  <div class="field">
+   <%@message.user_id=current_user.id%>
+   <%@message.sender_id=current_user.id%>
+   <%@message.receiver_id=params[:id]%>
+
+   <%= f.hidden_field :user_id %>
+   <%= f.hidden_field :sender_id %>
+   <%= f.hidden_field :receiver_id %>
+  </div>
+
+  <div  class="actions">
+<a name="bottom"></a>
+    <%= f.submit 'send' %>
+  </div>
+<% end %>
+
+<%session['saved_location']='userMessage'%>
+
+<%session['userMessageParam']=params[:id]%>
+<div id="messages">
+
+ <%= render Message.where("(sender_id = :uid1 AND receiver_id= :uid2) OR (sender_id= :uid2 AND receiver_id= :uid1)", {:uid1=> current_user.id, :uid2 => params[:id]}) %>
+
+</div>

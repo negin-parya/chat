@@ -1,0 +1,58 @@
+<script type="text/javascript">
+function showPopup(url,name) {
+
+var e = document.getElementById("Select2");
+
+
+var strVal = e.options[e.selectedIndex].value;
+
+
+url=url+strVal;
+newwindow=window.open(url,strVal,'height=220,width=520,top=200,left=300,resizable');
+if (window.focus) {newwindow.focus()}
+}
+</script>
+
+
+<a href="/messages">Global Messages</a>
+<br>
+
+<a href="/spots">Classroom</a>
+
+<br>
+Please Double Click on each message to start chatting with the sender.
+<table>
+  <tr>
+    <th>Private Messages:</th>
+      
+   
+   <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+
+  <tr>
+
+<td>
+<select name="drop2" id="Select2"  style = "width:=400px"   multiple="multiple" onDblClick="showPopup('/userMessage/',1);return(false);">
+
+<% @private_messages.each do |pmessage| %>
+
+
+
+    <% id=pmessage.sender_id %>
+    <% if id!=nil then %>
+    <% us=User.find_by_id(id)%>
+
+    <option value="<%= pmessage.sender_id %>" > <%= us.email.to_s%>:  <%= pmessage.message_text %></option>
+
+      
+   
+<%end%>
+<% end %>
+
+
+</select>  
+
+</table>
