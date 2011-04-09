@@ -22,7 +22,7 @@ class SpotsController < ApplicationController
           
           end
       end
-       redirect_to(root_path)
+       redirect_to root_path
   end
 
    
